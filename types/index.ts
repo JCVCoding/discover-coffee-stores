@@ -3,6 +3,7 @@ export type CoffeeStoreType = {
   name: string;
   imgUrl: string;
   address: string;
+  voting: number;
 };
 
 export type MapBoxType = {
@@ -11,4 +12,10 @@ export type MapBoxType = {
     address: string;
   };
   text: string;
+};
+
+export type AirtableRecordType = {
+  id: string;
+  recordId: string;
+  fields: CoffeeStoreType;
 };

@@ -3,9 +3,13 @@ import Link from "next/link";
 import { fetchCoffeeStore, fetchCoffeeStores } from "@/lib/coffee-stores";
 import Image from "next/image";
 import { CoffeeStoreType } from "@/types";
+import { createCoffeeStore } from "@/lib/airtable";
+import Upvote from "@/components/upvote.client";
 
 async function getData(id: string, queryId: string) {
-  return await fetchCoffeeStore(id, queryId);
+  const coffeeStoreFromMapbox = await fetchCoffeeStore(id, queryId);
+  const _createCoffeeStore = createCoffeeStore(coffeeStoreFromMapbox, id);
+  return coffeeStoreFromMapbox;
 }
 
 export async function generateStaticParams() {
@@ -52,9 +56,16 @@ export default async function Page(props: {
         <div className={`glass mt-12 flex-col rounded-lg p-4 lg:mt-48`}>
           {address && (
             <div className="mb-4 flex">
+              <Image
+                src="/static/icons/places.svg"
+                width="24"
+                height="24"
+                alt="places icon"
+              />
               <p className="pl-2">{address}</p>
             </div>
           )}
+          <Upvote />
         </div>
       </div>
     </div>
