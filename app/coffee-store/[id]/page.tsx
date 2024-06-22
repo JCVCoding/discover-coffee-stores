@@ -66,7 +66,7 @@ export default async function Page(props: {
               <p className="pl-2">{address}</p>
             </div>
           )}
-          <Upvote voting={voting} />
+          <Upvote voting={voting} id={id} />
         </div>
       </div>
     </div>
