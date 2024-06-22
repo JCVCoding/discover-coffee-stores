@@ -26,21 +26,27 @@ export const createCoffeeStore = async (
   coffeeStore: CoffeeStoreType,
   id: string
 ) => {
-  const { address, imgUrl, name, voting } = coffeeStore;
+  const { name, address, voting = 0, imgUrl } = coffeeStore;
+
   try {
     if (id) {
       const records = await findRecordByFilter(id);
       if (records.length === 0) {
         const createRecords = await table.create([
           {
-            fields: { id, name, address, voting, imgUrl },
+            fields: {
+              id,
+              name,
+              address,
+              voting,
+              imgUrl,
+            },
           },
         ]);
         if (createRecords.length > 0) {
           console.log("Created a store with id", id);
           return getMinifiedRecords(createRecords);
         }
-        return getMinifiedRecords(createRecords);
       } else {
         console.log("Coffee Store exists");
         return records;
@@ -49,6 +55,6 @@ export const createCoffeeStore = async (
       console.error("Store id is missing");
     }
   } catch (error) {
-    console.error("Error creating or finding a coffee store");
+    console.error("Error creating or finding a coffee store", error);
   }
 };
