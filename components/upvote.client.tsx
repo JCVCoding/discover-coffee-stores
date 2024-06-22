@@ -11,6 +11,7 @@ export function SubmitButton() {
     <button
       type="submit"
       aria-disabled={pending}
+      disabled={pending}
       className="bg-purple-951 min-w-[120px]"
     >
       {pending ? (
@@ -41,7 +42,7 @@ export default function Upvote({ voting, id }: { voting: number; id: string }) {
           height={24}
           alt="star icon"
         />
-        <p className="pl-2">{state.voting}</p>
+        <p className="pl-2">{state!.voting}</p>
       </div>
       <SubmitButton />
     </form>

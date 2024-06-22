@@ -14,5 +14,7 @@ export const upvoteAction = async (prevState: State) => {
       voting: data.length > 0 ? data[0].voting : 0,
       id,
     };
+  } else {
+    return { id };
   }
 };
