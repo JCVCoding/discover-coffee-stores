@@ -8,8 +8,9 @@ import Upvote from "@/components/upvote.client";
 
 async function getData(id: string, queryId: string) {
   const coffeeStoreFromMapbox = await fetchCoffeeStore(id, queryId);
-  const _createCoffeeStore = createCoffeeStore(coffeeStoreFromMapbox, id);
-  return coffeeStoreFromMapbox;
+  const _createCoffeeStore = await createCoffeeStore(coffeeStoreFromMapbox, id);
+  const voting = _createCoffeeStore ? _createCoffeeStore[0].voting : 0;
+  return coffeeStoreFromMapbox ? { ...coffeeStoreFromMapbox, voting } : {};
 }
 
 export async function generateStaticParams() {
@@ -30,7 +31,7 @@ export default async function Page(props: {
   } = props;
 
   const coffeeStore = await getData(id, queryId);
-  const { name = "", address = "", imgUrl = "" } = coffeeStore;
+  const { name = "", address = "", imgUrl = "", voting } = coffeeStore;
   return (
     <div className="h-full pb-80">
       <div className="m-auto grid max-w-full px-12 py-12 lg:max-w-6xl lg:grid-cols-2 lg:gap-4">
@@ -65,7 +66,7 @@ export default async function Page(props: {
               <p className="pl-2">{address}</p>
             </div>
           )}
-          <Upvote />
+          <Upvote voting={voting} />
         </div>
       </div>
     </div>
