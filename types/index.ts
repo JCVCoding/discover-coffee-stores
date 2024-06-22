@@ -19,3 +19,8 @@ export type AirtableRecordType = {
   recordId: string;
   fields: CoffeeStoreType;
 };
+
+export type SearchParamsType = {
+  params: { id: string };
+  searchParams: { id: string };
+};

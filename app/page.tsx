@@ -2,11 +2,22 @@ import Card from "@/components/card.server";
 import NearbyCoffeeStores from "@/components/nearby-coffee-stores.client";
 import { fetchCoffeeStores } from "@/lib/coffee-stores";
 import { CoffeeStoreType } from "@/types";
+import { Metadata } from "next";
+import { getDomain } from "@/utils";
 
 async function getData() {
   const SF_LongLat = "-122.43759184772618%2C37.76127174005592";
   return await fetchCoffeeStores(SF_LongLat, 6);
 }
+
+export const metadata: Metadata = {
+  title: "Coffee Connoisseur",
+  description: "Allows you to discover local coffee shops near you",
+  metadataBase: getDomain(),
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Home() {
   const coffeeStores = await getData();
