@@ -11,6 +11,7 @@ const getListOfCoffeeStorePhotos = async () => {
       query: "coffee shop",
       page: 1,
       perPage: 10,
+      orientation: "landscape",
     })
     .then((result) => {
       if (result.errors) {
