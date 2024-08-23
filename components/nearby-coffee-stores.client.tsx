@@ -14,12 +14,16 @@ const NearbyCoffeeStores = () => {
     locationErrorMessage,
   } = useTrackLocation();
 
-  const [coffeeStores, setCoffeeStores] = useState([]);
+  const [coffeeStores, setCoffeeStores] = useState(() => {
+    const storedStores = sessionStorage.getItem("coffeeStores");
+    console.log(storedStores);
+    return storedStores ? JSON.parse(storedStores) : [];
+  });
 
   const handleOnClick = () => {
     handleTrackLocation();
   };
-  console.log(coffeeStores);
+
   useEffect(() => {
     async function coffeeStoresByLocation() {
       if (longLat) {
@@ -30,6 +34,7 @@ const NearbyCoffeeStores = () => {
           );
           const coffeeStores = await response.json();
           setCoffeeStores(coffeeStores);
+          sessionStorage.setItem("coffeeStores", JSON.stringify(coffeeStores));
         } catch (error) {
           console.error(error);
         }
