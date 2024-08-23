@@ -23,13 +23,13 @@ export default async function Home() {
   const coffeeStores = await getData();
   return (
     <div className="mb-56">
-      <main className="mx-auto mt-10 max-w-6xl px-4">
+      <main className="mx-auto max-w-6xl px-4">
         <NearbyCoffeeStores />
-        <div className="mt-20">
-          <h2 className="mt-8 pb-8 text-4xl font-bold text-white">
-            San Francisco Stores
-          </h2>
-        </div>
+
+        <h2 className="mt-8 pb-8 font-bold text-white text-2xl md:text-4xl text-center md:text-start">
+          San Francisco Stores
+        </h2>
+
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-6">
           {coffeeStores.map((store: CoffeeStoreType, idx: number) => (
             <Card

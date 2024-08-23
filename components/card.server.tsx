@@ -14,7 +14,7 @@ export default function Card({ name, imgUrl, href }: CardType) {
         className={`glass min-h-[200px] rounded-xl px-5 pb-5 pt-1 backdrop-blur-3xl`}
       >
         <div className="my-3">
-          <h2 className="w-64 text-ellipsis whitespace-nowrap text-xl font-bold">
+          <h2 className="w-64 text-ellipsis whitespace-nowrap overflow-hidden text-xl font-bold">
             {name}
           </h2>
         </div>
@@ -22,8 +22,8 @@ export default function Card({ name, imgUrl, href }: CardType) {
           <Image
             className="max-h-[200px] min-h-[200px] rounded-lg shadow-lg"
             src={imgUrl}
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="100vw 50vw 33vw"
             alt={"Coffee Store Image"}
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8/+ZNPQAIoQM4xp5zkgAAAABJRU5ErkJggg=="
             placeholder="blur"

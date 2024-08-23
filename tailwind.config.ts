@@ -8,9 +8,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        gradient: "url('/static/background.webp')",
-      },
       colors: {
         purple: {
           951: "rgba(79, 70, 229, 1)",
@@ -20,6 +17,8 @@ const config: Config = {
           951: "hsla(0, 0%, 100%, 0.4);",
           952: "#373b64",
         },
+        green: { 123: "#d7e3de", 124: "#104936" },
+        blue: { 123: "#7aaecb" },
       },
     },
   },

@@ -5,7 +5,6 @@ import useTrackLocation from "@/hooks/use-track-location";
 
 import { CoffeeStoreType } from "@/types";
 import { useEffect, useState } from "react";
-import { fetchCoffeeStores } from "@/lib/coffee-stores";
 
 const NearbyCoffeeStores = () => {
   const {
@@ -20,7 +19,7 @@ const NearbyCoffeeStores = () => {
   const handleOnClick = () => {
     handleTrackLocation();
   };
-
+  console.log(coffeeStores);
   useEffect(() => {
     async function coffeeStoresByLocation() {
       if (longLat) {
@@ -37,6 +36,7 @@ const NearbyCoffeeStores = () => {
       }
     }
     coffeeStoresByLocation();
+    console.log(coffeeStores);
   }, [longLat]);
 
   return (
@@ -48,11 +48,9 @@ const NearbyCoffeeStores = () => {
       {locationErrorMessage && <p>Error: {locationErrorMessage}</p>}
       {coffeeStores.length > 0 && (
         <>
-          <div className="mt-20">
-            <h2 className="mt-8 pb-8 text-4xl font-bold text-white">
-              Stores Near Me
-            </h2>
-          </div>
+          <h2 className="mt-8 pb-8 text-4xl font-bold text-white">
+            Stores Near Me
+          </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-6">
             {coffeeStores.map((store: CoffeeStoreType, idx: number) => (
               <Card
