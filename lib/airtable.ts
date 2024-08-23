@@ -13,7 +13,7 @@ const getMinifiedRecords = (records: Array<AirtableRecordType>) => {
   });
 };
 
-const findRecordByFilter = async (id: string) => {
+export const findRecordByFilter = async (id: string) => {
   const findRecords = await table
     .select({
       filterByFormula: `id="${id}"`,

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { upvoteAction } from "@/actions";
 import { useFormState, useFormStatus } from "react-dom";
+import { useEffect, useState } from "react";
 
 export function SubmitButton() {
   const { pending } = useFormStatus();
@@ -32,6 +33,16 @@ export function SubmitButton() {
 export default function Upvote({ voting, id }: { voting: number; id: string }) {
   const initialState = { id, voting };
   const [state, dispatch] = useFormState(upvoteAction, initialState);
+  const [voteCount, setVoteCount] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`/api/getCoffeeStoreVoteCount/${id}`).then(
+        (res) => res.json()
+      );
+      setVoteCount(response);
+    })();
+  });
 
   return (
     <form action={dispatch}>
@@ -42,7 +53,19 @@ export default function Upvote({ voting, id }: { voting: number; id: string }) {
           height={24}
           alt="star icon"
         />
-        <p className="pl-2">{state!.voting}</p>
+        <p className="pl-2">
+          {voteCount === null ? (
+            <Image
+              src={"/static/icons/loading-spinner.svg"}
+              width={30}
+              height={30}
+              alt="loading"
+              className="m-auto"
+            />
+          ) : (
+            voteCount
+          )}
+        </p>
       </div>
       <SubmitButton />
     </form>
