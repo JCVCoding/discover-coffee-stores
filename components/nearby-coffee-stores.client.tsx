@@ -14,11 +14,7 @@ const NearbyCoffeeStores = () => {
     locationErrorMessage,
   } = useTrackLocation();
 
-  const [coffeeStores, setCoffeeStores] = useState(() => {
-    const storedStores = sessionStorage.getItem("coffeeStores");
-    console.log(storedStores);
-    return storedStores ? JSON.parse(storedStores) : [];
-  });
+  const [coffeeStores, setCoffeeStores] = useState<CoffeeStoreType[]>([]);
 
   const handleOnClick = () => {
     handleTrackLocation();
@@ -32,16 +28,20 @@ const NearbyCoffeeStores = () => {
           const response = await fetch(
             `/api/getCoffeeStoresByLocation?longLat=${longLat}&limit=${limit}`
           );
-          const coffeeStores = await response.json();
-          setCoffeeStores(coffeeStores);
-          sessionStorage.setItem("coffeeStores", JSON.stringify(coffeeStores));
+          const data = await response.json();
+          setCoffeeStores(data);
+          sessionStorage.setItem("coffeeStores", JSON.stringify(data));
         } catch (error) {
           console.error(error);
+        }
+      } else {
+        const data = sessionStorage.getItem("coffeeStores");
+        if (data) {
+          setCoffeeStores(JSON.parse(data));
         }
       }
     }
     coffeeStoresByLocation();
-    console.log(coffeeStores);
   }, [longLat]);
 
   return (
