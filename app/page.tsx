@@ -26,7 +26,7 @@ export default async function Home() {
       <main className="mx-auto max-w-6xl px-4">
         <NearbyCoffeeStores />
 
-        <h2 className="mt-8 pb-8 font-bold text-white text-2xl md:text-4xl text-center md:text-start">
+        <h2 className="mt-8 pb-8 font-bold text-green-124 text-2xl md:text-4xl text-center md:text-start">
           San Francisco Stores
         </h2>
 
